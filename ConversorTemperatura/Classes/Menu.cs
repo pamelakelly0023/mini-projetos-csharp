@@ -1,12 +1,31 @@
+using ConversorTemperatura.Interfaces;
+
 namespace ConversorTemperatura.Classes
 {
-    public class MostrarMenu
+    public class Menu
     {
-        public MostrarMenu()
+        public Menu()
         {
-            
+            ITemperatura temperatura = new Temperatura();
+           
+
+            string opcao = ObterOpcao();
+
+            while(opcao.ToUpper() != "X")
+            {
+                double valor = ObterValor();
+                
+                switch(opcao)
+                {
+                    case "1": temperatura.ConverterTemperaturaCelsius(valor); break;
+                    case "2": temperatura.ConverterTemperaturaFahrenheit(valor); break;
+                    case "3": temperatura.ConverterTemperaturaKelvin(valor);break;
+                }
+
+               opcao = ObterOpcao();
+            }
         }
-        public string ObterOpcao()
+        private string ObterOpcao()
         {
             Console.WriteLine();
             Console.WriteLine("Qual tipo de temperatura você quer converter?");
@@ -20,6 +39,16 @@ namespace ConversorTemperatura.Classes
             string opcao = (Console.ReadLine()).ToUpper();
             Console.WriteLine();
             return opcao;
+        }
+
+        private double ObterValor()
+        {
+            Console.WriteLine();
+            Console.WriteLine("Qual valor você quer converter?");
+
+            double valor = double.Parse(Console.ReadLine());
+            return valor;
+
         }
     }
 }
