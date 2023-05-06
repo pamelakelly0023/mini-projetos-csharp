@@ -5,14 +5,14 @@ namespace ConversorTemperatura.Classes
     public class Temperatura : ITemperatura
     { 
         // TODO
-        // Alterar tipos doble para decimal
+        // 
         // formatar resultao
         public Temperatura()
         {
             
         }
 
-        public void converterTemperaturaCelsius(double valor)
+        public void ConverterTemperaturaCelsius(double valor)
         {
         
             double celsiusParaFahrenheit = valor * 1.8 + 32;
@@ -25,7 +25,7 @@ namespace ConversorTemperatura.Classes
             Console.WriteLine(resultado);
         }
 
-        public void converterTemperaturaFahrenheit(double valor)
+        public void ConverterTemperaturaFahrenheit(double valor)
         {
 
             double fahrenheitParaCelsius = (valor - 32)/1.8000;
@@ -37,7 +37,7 @@ namespace ConversorTemperatura.Classes
             Console.WriteLine(resultado);
         }
 
-        public void converterTemperaturaKelvin(double valor)
+        public void ConverterTemperaturaKelvin(double valor)
         {
     
             double kelvinParaCelsius = valor - 273.15;

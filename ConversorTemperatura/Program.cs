@@ -8,8 +8,8 @@ namespace ConversorTemperatura
         static void Main(string[] args)
         {
             ITemperatura temperatura = new Temperatura();
-           
-            string opcao = ObterOpcao();
+            MostrarMenu menu = new MostrarMenu();
+            string opcao = menu.ObterOpcao();
             
         
             while(opcao.ToUpper() != "X")
@@ -18,12 +18,12 @@ namespace ConversorTemperatura
                 
                 switch(opcao)
                 {
-                    case "1": temperatura.converterTemperaturaCelsius(valor); break;
-                    case "2": temperatura.converterTemperaturaFahrenheit(valor); break;
-                    case "3": temperatura.converterTemperaturaKelvin(valor);break;
+                    case "1": temperatura.ConverterTemperaturaCelsius(valor); break;
+                    case "2": temperatura.ConverterTemperaturaFahrenheit(valor); break;
+                    case "3": temperatura.ConverterTemperaturaKelvin(valor);break;
                 }
 
-                opcao = ObterOpcao();
+                //opcao = ObterOpcao();
             }
             
            Console.WriteLine("Obrigado por utilizar nossos serviços.");
@@ -31,21 +31,7 @@ namespace ConversorTemperatura
         }
 
 
-        private static string ObterOpcao()
-        {
-            Console.WriteLine();
-            Console.WriteLine("Qual tipo de temperatura você quer converter?");
-
-            Console.WriteLine("1 - Celsius (C)");
-            Console.WriteLine("2 - Fahrenheit (F)");
-            Console.WriteLine("3 - Kelvin (K)");
-            Console.WriteLine("X - Sair");
-            Console.WriteLine();
-
-            string opcao = (Console.ReadLine()).ToUpper();
-            Console.WriteLine();
-            return opcao;
-        }
+       
 
         private static double ObterValor()
         {
