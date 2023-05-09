@@ -4,9 +4,6 @@ namespace ConversorTemperatura.Classes
 {
     public class Temperatura : ITemperatura
     { 
-        // TODO
-        // 
-        // formatar resultao
         public Temperatura()
         {
             
@@ -31,8 +28,8 @@ namespace ConversorTemperatura.Classes
             double fahrenheitParaCelsius = (valor - 32)/1.8000;
             double fahrenheitParaKelvin = (valor + 459.67) * 5/9; 
 
-            string resultado = ($"Conversão de {valor}ºF para Celsius é: " + fahrenheitParaCelsius + "ºC\r\n" +
-                                $"Conversão de {valor}ºF para Kelvin é: " + fahrenheitParaKelvin + "K" );
+            string resultado = ($"Conversão de {valor}ºF para Celsius é: " + fahrenheitParaCelsius.ToString("N1") + "ºC\r\n" +
+                                $"Conversão de {valor}ºF para Kelvin é: " + fahrenheitParaKelvin.ToString("N1") + "K" );
 
             Console.WriteLine(resultado);
         }
@@ -43,8 +40,8 @@ namespace ConversorTemperatura.Classes
             double kelvinParaCelsius = valor - 273.15;
             double kelvinParaFahrenheit = (valor - 273.15) * (9/5 + 32);
 
-             string resultado = ($"Conversão de {valor}K para Celsius é: " + kelvinParaCelsius + "ºC\r\n" +
-                                $"Conversão de {valor}K para Fahrenheit é: " + kelvinParaFahrenheit + "ºF" );
+             string resultado = ($"Conversão de {valor}K para Celsius é: " + kelvinParaCelsius.ToString("N1") + "ºC\r\n" +
+                                $"Conversão de {valor}K para Fahrenheit é: " + kelvinParaFahrenheit.ToString("N1") + "ºF" );
 
             Console.WriteLine(resultado);
             

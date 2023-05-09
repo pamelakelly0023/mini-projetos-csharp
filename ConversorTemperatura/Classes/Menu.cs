@@ -36,6 +36,9 @@ namespace ConversorTemperatura.Classes
             Console.WriteLine("X - Sair");
             Console.WriteLine();
 
+            // TO DO
+            // Tratar dados de input
+
             string opcao = (Console.ReadLine()).ToUpper();
             Console.WriteLine();
             return opcao;
