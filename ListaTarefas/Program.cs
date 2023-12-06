@@ -1,3 +1,4 @@
+using ListaTarefas.Configuration;
 using ListaTarefas.Entities;
 using ListaTarefas.Persistence;
 using ListaTarefas.Persistence.Repositories;
@@ -21,7 +22,7 @@ builder.Services.AddControllers().AddJsonOptions(x =>
     x.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
 });
 
-// builder.Services.AddIdentityConfiguration(builder.Configuration);
+builder.Services.AddIdentityConfig(builder.Configuration);
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
