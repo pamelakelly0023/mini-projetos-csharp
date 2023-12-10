@@ -25,6 +25,11 @@ namespace ListaTarefas.Configuration
                 options.UseMySql(connectionString,
                 ServerVersion.AutoDetect(connectionString)));
 
+            services.AddDefaultIdentity<IdentityUser>()
+                .AddRoles<IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
+                
             return services;
         }
     }
