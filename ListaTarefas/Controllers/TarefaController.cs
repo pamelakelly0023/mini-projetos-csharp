@@ -5,7 +5,9 @@
     using ListaTarefas.Persistence.Repositories;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
+	using Microsoft.AspNetCore.Authorization;
 
+	[Authorize]
 	[Route("api/[controller]")]
 	[ApiController]
 	public class TarefaController : ControllerBase
