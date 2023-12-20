@@ -43,7 +43,8 @@ namespace ListaTarefas.Controllers
                 Expires = DateTime.UtcNow.AddHours(_appSettings.ExpiracaoHoras),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             });
-
+            
+            _logger.LogInformation("Token criado:" + token);
             var encodedToken = tokenHandler.WriteToken(token);
             return encodedToken;
         }

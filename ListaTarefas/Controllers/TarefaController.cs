@@ -6,21 +6,25 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
 	using Microsoft.AspNetCore.Authorization;
+	using Microsoft.Extensions.Logging;
 
-	[Authorize]
+    [Authorize]
 	[Route("api/[controller]")]
 	[ApiController]
 	public class TarefaController : ControllerBase
 	{
 		private readonly ITarefaRepository _repository;
-		public TarefaController(ITarefaRepository repository)
+		private readonly ILogger _logger;
+		public TarefaController(ITarefaRepository repository,  ILogger<TarefaController> logger)
 		{
 			_repository = repository;
+			_logger = logger;
 		}
 
 		[HttpPost]
 		public IActionResult Post(AdicionarTarefaModel model)
 		{
+			DateTime currentTime = DateTime.UtcNow;
 			var tarefa = new Tarefa (
 				model.Titulo,
 				model.Descricao,
@@ -29,6 +33,7 @@
 			
 			_repository.Add(tarefa);
 
+			_logger.LogInformation("Tarefa criada: " + tarefa.Titulo + " Em: " + currentTime );
 			return CreatedAtAction("GetById", new { id = tarefa.Id }, tarefa);
 		}
 		[HttpGet]
@@ -54,6 +59,7 @@
 			var tarefa = _repository.GetById(id);
             if(tarefa == null)
             {
+				_logger.LogInformation("Tarefa Não encontrada" );
                 return NotFound();
             }
 
@@ -68,6 +74,7 @@
 			var tarefa = _repository.GetById(id);
             if(tarefa == null)
             {
+				_logger.LogInformation("Tarefa Não encontrada" );
                 return NotFound();
             } 
 			_repository.Delete(tarefa.Id);
