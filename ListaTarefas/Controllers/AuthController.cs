@@ -3,6 +3,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using ListaTarefas.Controllers;
+using ListaTarefas.Models;
 using ListaTarefas.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
@@ -31,8 +32,36 @@ namespace ListaTarefas.Controllers
             _appSettings = appSettings.Value;
         }
 
+        [HttpPost("registrar")]
+        public async Task<ActionResult> Registrar (RegistrarUsuarioModel registrarUser)
+        {
+            var user = new IdentityUser
+            {
+                UserName = registrarUser.Email,
+                Email = registrarUser.Email,
+                EmailConfirmed = true
+            };
+
+            var result = await _userManager.CreateAsync(user, registrarUser.Password);
+
+            if(result.Succeeded)
+            {
+                await _signInManager.SignInAsync(user, false);
+                //return CreatedAtAction("User", new { user = user.Email }, user);
+                return Ok(GerarTokenJWT());
+            } 
+            foreach (var error in result.Errors)
+            {
+                var notificacao = error.Description;
+                return BadRequest(notificacao);
+            }
+
+            _logger.LogInformation("Usuario registrado:" + user);
+            return CreatedAtAction("Usuario", registrarUser);
+        }
+
         [HttpGet]
-        public string GerarTokenJWT()
+        private string GerarTokenJWT()
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
@@ -49,4 +78,5 @@ namespace ListaTarefas.Controllers
             return encodedToken;
         }
     }
+
 }
