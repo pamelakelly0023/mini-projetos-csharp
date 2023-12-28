@@ -56,7 +56,7 @@ namespace ListaTarefas.Controllers
                 return BadRequest(notificacao);
             }
 
-            _logger.LogInformation("Usuario registrado:" + user);
+            _logger.LogInformation("Usuario: {user} registrado:", user.UserName);
             return CreatedAtAction("Usuario", registrarUser);
         }
 
@@ -73,7 +73,7 @@ namespace ListaTarefas.Controllers
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             });
             
-            _logger.LogInformation("Token criado:" + token);
+            _logger.LogInformation("Token criado: {token} ", token );
             var encodedToken = tokenHandler.WriteToken(token);
             return encodedToken;
         }

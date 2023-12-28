@@ -24,7 +24,7 @@
 		[HttpPost]
 		public IActionResult Post(AdicionarTarefaModel model)
 		{
-			DateTime currentTime = DateTime.UtcNow;
+			
 			var tarefa = new Tarefa (
 				model.Titulo,
 				model.Descricao,
@@ -33,7 +33,7 @@
 			
 			_repository.Add(tarefa);
 
-			_logger.LogInformation("Tarefa criada: " + tarefa.Titulo + " Em: " + currentTime );
+			_logger.LogInformation("Criando tarefa: {tarefa} em {data} " , tarefa.Titulo, DateTime.UtcNow );
 			return CreatedAtAction("GetById", new { id = tarefa.Id }, tarefa);
 		}
 		[HttpGet]
@@ -49,6 +49,7 @@
 
 			if(tarefa == null)
 			{
+				_logger.LogWarning("Tarefa com id: {Id} não encontrada" , id );
 				return NotFound();
 			}
 			return Ok(tarefa);
@@ -59,7 +60,7 @@
 			var tarefa = _repository.GetById(id);
             if(tarefa == null)
             {
-				_logger.LogInformation("Tarefa Não encontrada" );
+				_logger.LogWarning("Tarefa com id: {Id} não encontrada" , id );
                 return NotFound();
             }
 
